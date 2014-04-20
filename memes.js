@@ -3,7 +3,7 @@ function snippet_replace(memes_py) {
 
     // Get the previous word if there is no selection
     if (!editor.selectedText()) {
-	elem.setSelectionRange(editor.findCharBackward(' ', 1) + 1, elem.value.length)
+	elem.setSelectionRange(editor.findCharBackward(' ', 1) + 1, elem.value.length);
     }
 
     let name = editor.selectedText().replace(/ /gm, "_");
@@ -18,9 +18,9 @@ function snippet_replace(memes_py) {
 
     if (url != "No meme found.") {
 	// (91) lol  : lol.com
-	let match = /\(([0-9]+)\)\s*(.*?)\s*:\s+(.*)/g.exec(url)
+	let match = /\(([0-9]+)\)\s*(.*?)\s*:\s+(.*)/g.exec(url);
 	let cert = match[1];
-	let key = match[2]
+	let key = match[2];
 	url = match[3];
 	selection_replace(elem, url);
 	liberator.echomsg("'" + name + "' -> '" + url +"' certainty: " + cert + "%, key: '" + key +"'. C-z to undo.");
