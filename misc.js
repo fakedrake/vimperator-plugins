@@ -44,7 +44,21 @@ function content_in_editor(elem) {
 function clear_xul() {
     try {toggleSidebar();} catch(e) {};
     gFindBar.close();
+    liberator.focusContent(true);
 }
+
+function dumptabs(fname, sep) {
+    tabdump = "";
+    tabs.get().forEach( function (i) { tabdump += i.join(sep) + " \n"; });
+    io.File(fname).write(tabdump);
+}
+
+commands.addUserCommand(["dumptabs"],
+			"Dump all the tabs in a file!",
+			function (fname) dumptabs(fname, " ~~~ "),
+			{ count: true, argCount: '1'},
+			true
+		       );
 
 hints.addMode('i', 'Jump to input',
 	      function (e) buffer.focusElement(e),
@@ -61,8 +75,6 @@ mappings.addUserMap(
     ["<C-g>"],
     "This is a radical esc basically.",
     function () {
-	buffer.shiftFrameFocus(1, true);
 	modes.reset();
 	clear_xul();
-	liberator.echomsg("Focus to frame 1.");
     });
